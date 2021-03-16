@@ -96,11 +96,6 @@ int main()
     put_c(test, 'b');
     put_d(test, 122223);
 
-    a_1 = get_a(test);
-    b_1 = get_b(test);
-    c_1 = get_c(test);
-    d_1 = get_d(test);
-
     cout << a_1 << '\n';
     cout << b_1 << '\n';
     cout << c_1 << '\n';
