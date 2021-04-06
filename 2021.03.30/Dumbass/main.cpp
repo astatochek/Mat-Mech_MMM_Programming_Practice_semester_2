@@ -231,11 +231,11 @@ int main()
 
     while(ONGOING)
     {
-        cout << "info:\n";
+        /*cout << "info:\n";
         show(your_hand.data);
         show(opponent_hand.data);
         show(dumpster);
-        cout << "end of info\n\n";
+        cout << "end of info\n\n";*/
         if (iter_turn.current_stage == "your go")
         {
             check = true;
