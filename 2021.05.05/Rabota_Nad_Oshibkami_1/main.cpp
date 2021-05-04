@@ -36,8 +36,6 @@ int AoA::get(size_t i, size_t j)
 
 void AoA::put(size_t i, size_t j, int val)
 {
-    if (i >= m) throw "Out of m";
-    if (j >= (size_t)(A[i] - A[i+1])) throw "Out of k[i]";
     A[i][j] = val;
 }
 
