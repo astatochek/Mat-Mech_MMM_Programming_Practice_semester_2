@@ -1,5 +1,4 @@
 #include <iostream>
-#include <ostream>
 #include <vector>
 
 template <typename T, size_t rows, size_t cols> class Matrix;
@@ -49,10 +48,8 @@ public:
         delete[] M;
     }
 
-    Matrix(const Matrix  &_M); // copy-constructor
+    Matrix(const Matrix  &_M);
     Matrix<T, rows, cols> &operator=(const Matrix<T, rows, cols> &_M);
-    Matrix<T, rows, cols> operator+(const Matrix<T, rows, cols> &_M);
-    Matrix<T, rows, cols> operator-(const Matrix<T, rows, cols> &_M);
     Matrix<T, rows, cols> operator*(const double d);
 
     template<typename T, size_t N>
