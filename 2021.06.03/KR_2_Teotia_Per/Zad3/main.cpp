@@ -87,7 +87,7 @@ friend set merge(set A, set B)
 friend set intersect(set A, set B)
 {
 	std::vector <DataType> elements = A.elements();
-	res = set();
+	set res = set();
 	for (auto elem : elements) // добавляем в res все элементы, которые есть и в A, и в B
 		if (B.find(elem))
 			res.add(elem);
