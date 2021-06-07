@@ -54,7 +54,7 @@ int main()
 	const int val{10};
     const int *ptr{&val};
     int *ptr1{const_cast <int*>(ptr)};
-    std::cout << "const_cast:\n" << foo(ptr1) << "\n\n\n";
+    std::cout << "const_cast:\n" << foo(ptr1) << "\n";
 
 
     int* p = new int(65);
@@ -66,12 +66,11 @@ int main()
 
 	parent *par = getObject(true);
 
-    child *c = dynamic_cast<child*>(par); // используем dynamic_cast для конвертации указателя класса Parent в указатель класса Child
+    child *c = dynamic_cast<child*>(par);
 
     std::cout << "dynamic_cast:\nname of the child is: \n" << c->getName() << '\n';
- 
-	delete par;
 
+	delete par;
 	return 0;
 }
 
