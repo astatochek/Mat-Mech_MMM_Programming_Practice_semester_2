@@ -1,79 +1,116 @@
 #include <iostream>
-#include <cmath>
+#include <math.h>
 using namespace std;
 
-class Complex{
-public:
-    float re, im;
+struct Complex
+{
+    float a, b;
 
-    Complex (float x, float y){
-        re = x;
-        im = y;
-    };
+    Complex (float x, float y)
+    {
+        a = x;
+        b = y;
+    }
 
-    float module(){
-        return pow(re*re + im*im, 0.5);
-    };
+    Complex (Complex &x)
+    {
+        a = x.a;
+        b = x.b;
+    }
 
-    Complex conjugated(){
-        return Complex(re, -im);
-    };
+    Complex& operator += (Complex &x)
+    {
+        a += x.a;
+        b += x.b;
+        return *this;
+    }
 
-    Complex &operator += (Complex &x){
-        re += x.re;
-        im += x.im;
-        return * this;
-    };
+    Complex& operator -= (Complex &x)
+    {
+        a -= x.a;
+        b -= x.b;
+        return *this;
+    }
 
-    Complex &operator -= (Complex &x){
-        re -= x.re;
-        im -= x.im;
-        return * this;
-    };
+    Complex& operator *= (Complex &x)
+    {
+        float new_a = a*x.a - b*x.b;
+        float new_b = a*x.b + x.a*b;
+        a = new_a;
+        b = new_b;
+        return *this;
+    }
 
-    Complex &operator *= (Complex &x){
-        float new_re = re*x.re - im*x.im, new_im = re*x.im + x.re*im;
-        re = new_re;
-        im = new_im;
-        return * this;
-    };
+    Complex& operator /= (Complex &x)
+    {
+        float new_a = a*x.a + b*x.b;
+        float new_b = b*x.a - x.b*a;
+        try
+        {
+            if (x.a*x.a + x.b*x.b != 0) 
+            {
+                a = new_a / (x.a*x.a + x.b*x.b);
+                b = new_b / (x.a*x.a + x.b*x.b);
+            }
+            else 
+                throw "can't divide by zero!\n";
+        }
+        catch(const char* errMsg)
+        {
+            std::cout << errMsg;
+        }
 
-    Complex &operator /= (Complex &x){
-        float new_re = re*x.re + im*x.im, new_im = im*x.re - x.im*re;
-        re = new_re / (x.re*x.re + x.im*x.im);
-        re = new_im / (x.re*x.re + x.im*x.im);
-        return * this;
-    };
+        return *this;
+    }
 
+	Complex& operator = (Complex &x)
+	{
+	    a = x.a;
+	    b = x.b;
+	    return *this;
+	}
+
+
+	Complex& conjugate()
+	{
+		b = -b;	
+		return *this;
+	}
 };
 
-Complex &operator - (Complex x, Complex &y){
+Complex &operator - (Complex x, Complex &y)
+{
     return x -= y;
-};
+}
 
-Complex &operator + (Complex x, Complex &y){
+Complex &operator + (Complex x, Complex &y)
+{
     return x += y;
-};
+}
 
-Complex &operator * (Complex x, Complex &y){
+Complex &operator * (Complex x, Complex &y)
+{
     return x *= y;
-};
+}
 
-Complex &operator / (Complex x, Complex &y){
+Complex &operator / (Complex x, Complex &y)
+{
     return x /= y;
-};
+}
 
-ostream &operator << (ostream &out, Complex &x){
-    if (x.im < 0) out << "(" << x.re << " - " << -x.im << " i" << ")";
-    else if (x.re == x.im && x.im == 0) out << 0;
-    else if (x.im == 0) out << x.re;
-    else out << "(" << x.re << " + " << x.im << " i" << ")";
+ostream &operator << (ostream &out, Complex &x)
+{
+    if (x.b < 0) out << "(" << x.a << " - " << -x.b << "i" << ")";  
+    else out << "(" << x.a << " + " << x.b << "i" << ")";
     return out;
-};
+}
 
-bool Compare(Complex first, Complex second){
-    return first.module() >= second.module();
-};
+
+float abs(Complex &x)
+{
+	return sqrt(x.a*x.a + x.b*x.b);
+}
+ 
 
 int main() {
 
